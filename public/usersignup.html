@@ -5,19 +5,19 @@
     <title>Travel Agency</title>
 </head>
 <body>
-<form>
+<form action="/users/adduser" method="post">
 <label for="username">username</label><input name="username" type="text" required>
 <label for="password">password</label><input name="password" type="password" required>
 <label for="password">confirm-password</label><input name="spassword" type="password" required>
-<label for="name">name:</label><input name="name" type="name" required>
+<label for="name">name:</label><input name="name" type="text" required>
 <label for="gender">gender:</label> <select name="gender">
       <option value="male" >male</option>
       <option value="female" >female</option>
       <option value="other" >other</option>
 </select>
-<label for="address">address:</label><input type="text" required>
-<label for="phone">phone:</label><input type="text" required>
-<label for="e-mail">e-mail:</label><input type="email" required>
+<label for="address">address:</label><input type="text" name="address" required>
+<label for="phone">phone:</label><input type="text" name="phone" required>
+<label for="e-mail">e-mail:</label><input type="email" name="email" required>
 <button type="submit"></button>
 </form>
 

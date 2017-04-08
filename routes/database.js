@@ -34,7 +34,7 @@ module.exports={
            else if(rows[0].username===data.user) {
                c1 = {
                     user:rows[0].username,
-                     pass:rows[0].pas
+                     pass:rows[0].password
                }
            }
 
@@ -79,7 +79,54 @@ module.exports={
           cb(result);
        });
        conn.end();
-  }
+  },
+
+    adduser : function (data,cb) {
+        var conn=createConnection();
+        conn.connect();
+        const queryString = "INSERT INTO user VALUES (" +
+            "'" + data.username + "'," +
+            "'" + data.password + "'," +
+            "'" + data.name + "'," +
+            "'" + data.gender + "'," +
+            "'" + data.address + "'," +
+            "'" + data.phone + "'," +
+            "'" + data.email + "'" +
+           // "'" + data.best +"'"+
+            ");";
+        console.log(queryString);
+        conn.query(queryString,function(err,result){
+            console.log(result);
+            cb(result);
+        });
+        conn.end();
+    },
+    checkloginuser : function (data ,cb) {
+        var c1={};
+        const conn = createConnection();
+        conn.connect();
+
+        conn.query("select * from user where username="+"'"+data.user+"'" +"AND password="+"'"+data.pas+"'", function (err ,rows,fields) {
+            if(err)
+                throw err;
+
+            console.log(rows);
+            if(rows.length===0){
+                c1={
+                    user:'not'
+                };
+            }
+            else if(rows[0].username===data.user) {
+                c1 = {
+                    user:rows[0].username,
+                    pass:rows[0].password
+                }
+            }
+  console.log(c1);
+            cb(c1);
+        });
+        conn.end();
+    }
 
 };
 
