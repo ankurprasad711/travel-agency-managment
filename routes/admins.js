@@ -23,6 +23,17 @@ router.get('/getdata',function(req,res){
      });
 
 });
+router.post('/getdata1',function(req,res){
+    console.log('hello');
+  db.existingtour(function(result){
+      console.log(result);
+      res.send(result);
+
+
+     });
+
+});
+
 var l;
 router.get('/upstate',function(req,res){
 

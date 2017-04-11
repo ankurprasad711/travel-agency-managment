@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel agency</title>
+</head>
+<style>
+
+</style>
+<body>
+<h2>hello {{name}}</h2>
+<button id="new">book a tour</button>
+<button id="del">cancel tour</button>
+<button id="book">view tour bookings</button>
+
+
+<a href="/users/bookaticket"><button >book a ticket</button></a>
+<button id="ticket">booked tickets</button>
+<button id="cancelticket">cancel ticket</button>
+<div id="show">
+
+</div>
+<!--<div id=""></div>
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+    var deleterow = function (){
+        //alert("are you sure");
+        if(confirm("Do you really want to delete record ?"))
+        {
+           var id=$(this).attr(id);
+           console.log(id);
+           alert('ok');
+            //all your other stuff
+        }
+    }
+$(document).ready(function() {
+
+    $('#new').click(function () {
+        //$("#book").css("display","none");
+        $.post("/admins/getdata1",{name:name}, function (data, status) {
+            //alert("Data: " + data + "\nStatus: " + status);
+            console.log(data);
+            var l = '';
+            l += '<form action="/users/booktour" method="post"><table border="1">' +
+                    "<tr><td>Select</td><td>booking id</td><td>place</td>" +
+                    "<td>package_cost</td><td>transportation" +
+                    "</td><td>vehicle</td></tr> ";
+
+            for (var i = 0; i < data.length; i++) {
+                l += "<tr>" + "<td><input type='radio' name='id' value="+'"'+data[i].id +'"'+'"'+">" +"</td>" +
+                        "<td>" + data[i].id + "</td>" +
+                        "<td>" + data[i].place + "</td>" +
+                        "<td>" + data[i].cost + "</td>" +
+                        "<td>" + data[i].trans + "</td>" +
+                        "<td>" + data[i].best + "</td>" +
+
+
+                        "</tr>";
+
+            }
+            l += "</table><button type='submit'>book</button></form>";
+            console.log(l);
+            $("#show").html(l);
+        });
+    });
+
+    $('#del').click(function () {
+        //$("#book").css("display","none");
+        $.post("/users/getdatabookings", {name: name}, function (data, status) {
+            //alert("Data: " + data + "\nStatus: " + status);
+            console.log(data);
+            var l = '';
+            if (data.length === 0) {
+                l += "<h2>no bookings.</h2>";
+                console.log(l);
+            }
+            else {
+                //var l='';
+                l += "<form action='/users/delete' method='post'><table border='1'><tr><td>Select</td><td>booking id</td>" +
+                        "<td>date of booking</td><td>date of journey</td>" +
+                        "<td>number of passengers</td>" +
+                        "</tr> ";
+                for (var i = 0; i < data.length; i++) {
+                    var dob = data[i].dob;
+                    dob = dob.slice(0, 10);
+                    var doj = data[i].doj;
+                    doj = doj.slice(0, 10);
+                    l += '<tr>' + "<td><input type='radio' name='id' value="+'"'+data[i].id +'"'+'"'+">" + "</td>" +
+                            "<td>" + data[i].id + "</td>" +
+                            "<td>" + dob + "</td>" +
+                            "<td>" + doj + "</td>" +
+                            "<td>" + data[i].no + "</td>" +
+                            // "<td>" + data[i].best + "</td>" +
+                          // console.log('<button id=' +'"' + data[i].id +'"' +'>cancel</button>');
+
+                            "</tr>";
+
+                }
+                l += "</table><button type='submit'>cancel</button></form>";
+                //$("#show").html(l);
+            }
+            $("#show").html(l);
+            //$("#cancel").show();
+        });
+    });
+
+
+
+    $('#book').click(function () {
+        //$("#book").css("display","none");
+        $.post("/users/getdatabookings", {name: name}, function (data, status) {
+            //alert("Data: " + data + "\nStatus: " + status);
+            console.log(data);
+            var l = '';
+            if (data.length === 0) {
+                l += "<h2>no bookings.</h2>";
+                console.log(l);
+            }
+            else {
+
+                l += "<table border='1'><tr><td>booking id</td><td>date of booking</td><td>date of journey</td><td>number of passengers</td></tr> ";
+                for (var i = 0; i < data.length; i++) {
+                    var dob = data[i].dob;
+                    dob = dob.slice(0, 10);
+                    var doj = data[i].doj;
+                    doj = doj.slice(0, 10);
+                    l += "<tr>" +
+                            "<td>" + data[i].id + "</td>" +
+                            "<td>" + dob + "</td>" +
+                            "<td>" + doj + "</td>" +
+                            "<td>" + data[i].no + "</td>" +
+                            // "<td>" + data[i].best + "</td>" +
+
+
+                            "</tr>";
+
+                }
+                l += "</table>";
+                //$("#show").html(l);
+            }
+            $("#show").html(l);
+        });
+    });
+    $('#ticket').click(function () {
+        console.log('ticket');
+        //$("#book").css("display","none");
+        $.post("/users/getticket", {name: name}, function (data, status) {
+            //alert("Data: " + data + "\nStatus: " + status);
+            console.log(data);
+            var l = '';
+            if (data.length === 0) {
+                l += "<h2>no tickets booked.</h2>";
+                console.log(l);
+            }
+            else {
+
+                l += "<table border='1'><tr><td>date of booking</td><td>date of journey</td><td>number of passengers</td><td>type_of_transport</td><td>boarding_point</td><td>destination</td></tr>";
+                for (var i = 0; i < data.length; i++) {
+                    var dob = data[i].dob;
+                    dob = dob.slice(0, 10);
+                    var doj = data[i].doj;
+                    doj = doj.slice(0, 10);
+                    l += "<tr>" +
+                            // "<td>" + data[i].id + "</td>" +
+                            "<td>" + dob + "</td>" +
+                            "<td>" + doj + "</td>" +
+                            "<td>" + data[i].no + "</td>" +
+                            "<td>" + data[i].type + "</td>" +
+                            "<td>" + data[i].boarding + "</td>" +
+                            "<td>" + data[i].destination + "</td>" +
+                            // "<td>" + data[i].best + "</td>" +
+
+
+                            "</tr>";
+
+                }
+                l += "</table>";
+                //$("#show").html(l);
+            }
+            $("#show").html(l);
+        });
+    });
+        $('#cancelticket').click(function () {
+        console.log('ticket');
+        //$("#book").css("display","none");
+        $.post("/users/getticket", {name: name}, function (data, status) {
+            //alert("Data: " + data + "\nStatus: " + status);
+            console.log(data);
+            var l = '';
+            if (data.length === 0) {
+                l += "<h2>no tickets booked.</h2>";
+                console.log(l);
+            }
+            else {
+
+                l += "<form action='/users/deleteticket' method='post'><table border='1'><tr><td>select></td><td>date of booking</td><td>date of journey</td><td>number of passengers</td><td>type_of_transport</td><td>boarding_point</td><td>destination</td></tr>";
+                for (var i = 0; i < data.length; i++) {
+                    var dob = data[i].dob;
+                    dob = dob.slice(0, 10);
+                    var doj = data[i].doj;
+                    doj = doj.slice(0, 10);
+                    l += "<tr>" + "<td><input type='radio' name='id' value="+'"'+data[i].id +'"'+'"'+">" + "</td>"+
+                    // "<td>" + data[i].id + "</td>" +
+                            "<td>" + dob + "</td>" +
+                            "<td>" + doj + "</td>" +
+                            "<td>" + data[i].no + "</td>" +
+                            "<td>" + data[i].type + "</td>" +
+                            "<td>" + data[i].boarding + "</td>" +
+                            "<td>" + data[i].destination + "</td>" +
+                            // "<td>" + data[i].best + "</td>" +
+
+
+                            "</tr>";
+
+                }
+                l += "</table><button type='submit'>cancel</button></form>";
+                //$("#show").html(l);
+            }
+            $("#show").html(l);
+        });
+    });
+});
+</script>
+</body>
+</html>

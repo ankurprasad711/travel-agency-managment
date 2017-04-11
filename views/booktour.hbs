@@ -1,0 +1,24 @@
+<form action="/users/existing" method="post">
+    <input name="id" id="i" type="text">
+
+    <input name="user" id="nam" type="text">
+   <label>package_cost</label><input id="pack" type="number">
+    <input type="number" name="pass" placeholder="no. of passengers" required id="no"><button type="button" id="nos">calculate fare</button><br>
+    <input name="doj" type="date" placeholder="date of journey">
+    <input name="c" id="cost" type="text">
+    <button type="submit">submit</button>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    $('#i').val("{{id}}");
+ var s='';
+ s+="{{name}}";
+    $('#nam').val(s);
+
+    $('#pack').val("{{cost}}");
+    $('#nos').click(function () {
+        $('#cost').val($('#no').val() * {{cost}});
+    });
+});
+</script>

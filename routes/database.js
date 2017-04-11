@@ -51,11 +51,11 @@ module.exports={
             console.log(rows);
             for(var row=0;row<rows.length;row++){
             list.push({
-              id:rows[0].id,
-              place: rows[0].place,
-              cost: rows[0].cost,
-              trans: rows[0].transportation,
-               best: rows[0].best
+              id:rows[row].id,
+              place: rows[row].place,
+              cost: rows[row].cost,
+              trans: rows[row].transportation,
+               best: rows[row].best
 
             });
             }
@@ -124,6 +124,124 @@ module.exports={
             }
   console.log(c1);
             cb(c1);
+        });
+        conn.end();
+    },
+    fetchbookings : function (data ,cb) {
+        var c1=[];
+        const conn = createConnection();
+        conn.connect();
+
+        conn.query("select * from bookings where username="+"'"+data.name+"'", function (err ,rows,fields) {
+            if(err)
+                throw err;
+
+            console.log(rows);
+            for(var row=0;row<rows.length;row++) {
+                c1.push({
+                    user: rows[row].username,
+                    id: rows[row].id,
+                    dob: rows[row].date_of_booking,
+                    no: rows[row].no_of_adults,
+                    doj: rows[row].date_of_journey
+
+                });
+            }
+            cb(c1);
+        });
+        conn.end();
+    },
+    delete: function ( data,callback) {
+
+        const conn = createConnection();
+        conn.connect();
+
+        conn.query('DELETE FROM bookings WHERE username='+'"'+data.user+ '"'+'and id='+'"'+data.id+'"', function (err , result) {
+            if(err)
+                throw err;
+
+            callback(result);
+        });
+
+    },
+
+    bookticket : function (data,cb) {
+        var conn=createConnection();
+        conn.connect();
+        const queryString = "INSERT INTO ticket VALUES (" +
+            "'" + data.user + "'," +
+            "'" + data.pas + "'," +
+            "'" + data.boarding + "'," +
+            "'" + data.destination + "'," +
+            "'" + data.type + "'," +
+            "'" + data.dob + "'," +
+            "'" + data.doj + "'" +
+            // "'" + data.best +"'"+
+            ");";
+        console.log(queryString);
+        conn.query(queryString,function(err,result){
+            console.log(result);
+            cb(result);
+        });
+        conn.end();
+    },
+    getticket : function (data ,cb) {
+        var c1=[];
+        const conn = createConnection();
+        conn.connect();
+
+        conn.query("select * from ticket where username="+"'"+data.name+"'", function (err ,rows,fields) {
+            if(err)
+                throw err;
+
+            console.log(rows);
+            for(var row=0;row<rows.length;row++) {
+                c1.push({
+                    id:rows[row].id,
+                    boarding: rows[row].boarding,
+                    type: rows[row].type,
+                    dob: rows[row].dob,
+                    no: rows[row].no,
+                    doj: rows[row].doj,
+                    destination: rows[row].destination
+
+                });
+            }
+            cb(c1);
+        });
+        conn.end();
+    },
+    deleteticket : function ( data,callback) {
+
+        const conn = createConnection();
+        conn.connect();
+ console.log('DELETE FROM ticket WHERE username='+'"'+data.user+ '"'+'and dob='+'"'+data.dob+'"');
+        conn.query('DELETE FROM ticket WHERE username='+'"'+data.user+ '"'+'and id='+'"'+data.id+'"', function (err , result) {
+            if(err)
+                throw err;
+
+            callback(result);
+        });
+
+    },
+    bookings : function (data,cb) {
+        var conn=createConnection();
+        conn.connect();
+        const queryString = "INSERT INTO bookings VALUES (" +
+            "'" + data.user + "'," +
+            "'" + data.id + "'," +
+            //data.id + ", " +
+
+          //  "'" + data.place + "'," +
+            "'" + data.dob + "'," +
+            "'" + data.pass + "'," +
+            "'" + data.doj + "'," +
+            "'" + data.cost +"'"+
+            ");";
+        console.log(queryString);
+        conn.query(queryString,function(err,result){
+            console.log(result);
+            cb(result);
         });
         conn.end();
     }

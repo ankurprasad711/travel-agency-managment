@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Agency</title>
+</head>
+<body>
+<form action="/users/ticket" method="post">
+    <input type="text" name="user" placeholder="username" required>
+    <input type="text" name="pass" placeholder="no. of passengers" required>
+    <input type="text" name="boarding" placeholder="boarding point" required>
+    <input type="text" name="destination" placeholder="destination" required>
+   <label for="type">preffered transport</label>
+    <select name="type">
+     <option value="bus">bus</option>
+     <option value="train">train</option>
+     <option value="plane">plane</option>
+     </select>
+    <input name="doj" type="date" placeholder="date of journey">
+    <button type="submit">submit</button>
+</form>
+
+
+</body>
+</html>

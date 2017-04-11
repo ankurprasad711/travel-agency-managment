@@ -3,8 +3,22 @@ $(document).ready(function (){
         $("#book").css("display","none");
         $.get("/admins/getdata", function(data, status){
             //alert("Data: " + data + "\nStatus: " + status);
+           var l='';
+            l+="<table border='1'><tr><td>booking id</td><td>place</td><td>package_cost</td><td>transportation</td><td>vehicle</td></tr> ";
+            for(var i=0;i<data.length;i++) {
+                l+="<tr>"+
+                    "<td>" + data[i].id + "</td>" +
+                    "<td>" + data[i].place + "</td>" +
+                    "<td>" + data[i].cost + "</td>" +
+                    "<td>" + data[i].trans + "</td>" +
+                    "<td>" + data[i].best + "</td>" +
 
-           var l="<h2>"+ data[0].id +" "+  data[0].place +" "+ data[0].cost +" "+ data[0].trans+ " " + data[0].best+"</h2>";
+
+                    "</tr>";
+
+            }
+            l+="</table>";
+            //$("#show").html(l);
         $("#show").show().html(l);
         });
     });

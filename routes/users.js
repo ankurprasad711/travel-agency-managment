@@ -5,14 +5,93 @@ var db=require('./database.js');
 
 /* GET users listing. */
 var d=0;
+var name="";
 router.get('/', function(req, res, next) {
    console.log(d);
   if(d===0){
         res.sendFile(path.resolve(__dirname + '/..' + '/public/users.html'))
     }
     else {
-        res.sendFile(path.resolve(__dirname + '/..' + '/public/usersection.html'));
+        res.render('usersection',{name:name});
     }
+});
+router.post('/getdatabookings', function(req, res, next) {
+   var data= {
+      name : name
+    };
+ db.fetchbookings(data,function(result){
+    res.send(result);
+ });
+});
+
+router.post('/delete', function(req, res, next) {
+ var data={
+     id:req.body.id,
+     user:name
+ };
+db.delete(data,function (result) {
+    console.log(result);
+   if(result){
+       res.render('error');
+   }
+});
+});
+router.post('/deleteticket', function(req, res, next) {
+    var data={
+        id:req.body.id,
+        user:name
+    };
+    console.log(data);
+    db.deleteticket(data,function (result) {
+        console.log(result);
+        if(result){
+            res.render('error');
+        }
+    });
+});
+
+router.post('/booktour',function (req,res) {
+
+       var  id=req.body.id;
+       var nam=name;
+    db.existingtour(function(result){
+        console.log(result);
+        console.log(id);
+ for(var i=0;i<result.length;i++){
+    if(result[i].id==id){
+        var cost=result[i].cost;
+       break;
+    }
+ }
+        res.render('booktour',{id:id,name:nam,cost:cost});
+    });
+
+
+});
+router.post('/existing',function (req,res) {
+    var d = new Date();
+    var s = '';
+    s += d.getFullYear();
+    s += '-' + d.getMonth() + '-' + d.getDate();
+    var data = {
+        id: req.body.id,
+        user: req.body.user,
+        cost: req.body.c,
+        doj: req.body.doj,
+        pass: req.body.pass,
+        dob: s
+
+    };
+    db.bookings(data, function (result) {
+        if (result) {
+            l = true;
+            res.redirect('/users/updat');
+        }
+        else {
+            l = false;
+            res.redirect('/users/updat');
+        }
+    });
 });
 router.post('/submit',function(req,res) {
 
@@ -24,6 +103,7 @@ router.post('/submit',function(req,res) {
     db.checkloginuser(data, function (result) {
 //console.log(result);
         c = result;
+        name=c.user;
         if (c.user === data.user) {
 
             d = 1;
@@ -69,5 +149,55 @@ router.get('/update',function (req,res){
 
     res.render("userudate",{label:l})
 
+});
+router.get('/updat',function (req,res){
+
+    res.render("ticket",{label:l});
+
+});
+router.post('/ticket',function(req,res) {
+    var d = new Date();
+    var s='';
+    s+=d.getFullYear();
+    s+='-'+d.getMonth()+'-'+d.getDate();
+    var data = {
+        user: req.body.user,
+        pas: req.body.pass,
+        boarding:req.body.boarding,
+        destination:req.body.destination,
+        type:req.body.type,
+        dob:s,
+        doj:req.body.doj
+
+
+    };
+    var c = {};
+    db.bookticket(data, function (result) {
+//console.log(result);
+        if(result){
+            l=true;
+            res.redirect('/users/updat');
+        }
+        else{
+            l=false;
+            res.redirect('/users/updat');
+        }
+
+
+
+    });
+
+});
+router.get('/bookaticket',function(req,res){
+  res.sendFile(path.resolve(__dirname + '/..' + '/public/tickets.html'));
+});
+
+router.post('/getticket', function(req, res, next) {
+    var data= {
+        name : name
+    };
+    db.getticket(data,function(result){
+        res.send(result);
+    });
 });
 module.exports = router;
