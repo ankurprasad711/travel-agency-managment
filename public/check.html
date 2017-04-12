@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel agency</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body {
+        background: url(https://4.bp.blogspot.com/-k8IX2Mkf0Jo/U4ze2gNn7CI/AAAAAAAA7xg/iKxa6bYITDs/s0/HOT+Balloon+Trip_Ultra+HD.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+    }
+    #sho{
+        background-color: white;
+
+    }
+    h2{
+        color:cyan;
+    }
+</style>
+<body>
+<br>
+<br>
+<br>
+
+<div >
+<label style="margin-left:50px;color:lawngreen;">boarding:</label> <input id="b" type="text" required>
+<label style="margin-left:140px;color:lawngreen;">destination:</label> <input id="d" type="text" required>
+    <button id="cl" class="btn btn-primary">search</button></div><br><br><br>
+
+    <div id="sho"></div>
+
+<script>
+    $(document).ready(function(){
+  $('#cl').click(function(){
+
+        var   b= $('#b').val();
+         var  d= $('#d').val();
+
+      $.post('/users/search',{b:b,d:d},function(data,status){
+ console.log(data);
+           var l='';
+       if (data.length === 0) {
+          l += "<h2>               route not available .</h2>";
+          console.log(l);
+      }
+      else {
+         l+="<form action='/users/all' method='post'><table class='table' border='1'><tr><td>boarding</td><td>destination</td></tr>" +
+             "<tr><td>"+b+"</td><td>"+d+"</td></tr>"+
+             "</table><button class='btn btn-danger' type='submit'>book</button></form>";
+      }
+     $('#sho').html(l);
+    });
+    });
+    });
+</script>
+</body>
+</html>

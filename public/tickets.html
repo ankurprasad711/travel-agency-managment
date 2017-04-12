@@ -2,24 +2,69 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Travel Agency</title>
+    <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style >
+    
+
+body{
+    background: url(https://4.bp.blogspot.com/-k8IX2Mkf0Jo/U4ze2gNn7CI/AAAAAAAA7xg/iKxa6bYITDs/s0/HOT+Balloon+Trip_Ultra+HD.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+div{
+    padding: 10px;
+    margin-left: 175px;
+}
+
+
+div.pk{
+    margin-top: -30px
+}
+
+
+label{
+    color: yellow;
+}
+
+h1{
+    color: red;
+}
+
+
+</style>
+
+
+
 </head>
 <body>
+<div class="container">
+<div><h1>book ticket here</h1></div>
 <form action="/users/ticket" method="post">
-    <input type="text" name="user" placeholder="username" required>
-    <input type="text" name="pass" placeholder="no. of passengers" required>
-    <input type="text" name="boarding" placeholder="boarding point" required>
-    <input type="text" name="destination" placeholder="destination" required>
+    <div><input type="text" name="user" placeholder="username" required></div>
+    <div><input type="text" name="pass" placeholder="no. of passengers" required></div>
+    <div><input type="text" name="boarding" placeholder="boarding point" required></div>
+    <div><input type="text" name="destination" placeholder="destination" required></div>
+    
    <label for="type">preffered transport</label>
+   <div class="pk">
     <select name="type">
      <option value="bus">bus</option>
      <option value="train">train</option>
      <option value="plane">plane</option>
      </select>
-    <input name="doj" type="date" placeholder="date of journey">
-    <button type="submit">submit</button>
+     </div>
+     <div><input name="doj" type="date" placeholder="date of journey"></div>
+    <div><button type="submit">submit</button></div>
+    
 </form>
 
-
+</div>
 </body>
 </html>

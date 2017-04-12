@@ -3,24 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+
+
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style >
+	
+body{
+	background: url(https://4.bp.blogspot.com/-k8IX2Mkf0Jo/U4ze2gNn7CI/AAAAAAAA7xg/iKxa6bYITDs/s0/HOT+Balloon+Trip_Ultra+HD.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+
+}
+
+div{
+    padding: 10px;
+    margin-left: 175px;
+}
+
+label{
+    color: yellow;
+    margin-left:15px;
+}
+
+div.hi{
+	height: 50px;
+	width: 200px;
+	margin-left: 450px;
+	margin-top: 50px;
+}
+
+div.hii{
+	margin-left: 375px;
+	margin-top: 50px;
+
+
+}
+div.hiii{
+	margin-top: -60px;
+	margin-left: 200px;
+}
+#show{
+    background-color: white;
+}
+
+
+</style>
+
+
+
 </head>
 <body>
-<button id="nt">new tour</button>
-<button id="et">existing tour</button>
-<div id="show"></div>
+
+
+<div class="container">
+
+<div class="hi"><h2>User login </h2></div>
+
+
+<div class="hii">
+<button id="nt" class="btn btn-info btn-lg" >new tour</button>
+<div class="hiii">
+<button id="et" class="btn btn-warning btn-lg" >existing tour</button>
+</div>
+</div>
+
+<br>
+    <br><br>
+<div style="background-color: white;" id="show"></div>
 <div id="book" style="display:none">
 <form action="/admins/addtour" method="post">
-    <h2>NEW TOUR INFO.</h2>
-    <label for="id">booking ID:</label><input type="text" name="id" required><br>
-    <label for="place">place:</label><input type="text" name="place" required><br>
-    <label for="cost">package cost:</label><input type="text" name="cost" required><br>
-    <label for="transport">transportation:</label><input type="text" name="transport" required><br>
-    <label for="best">best time to visit:</label><input type="text" name="best" required><br>
-   <button type="submit">submit</button>
+    <div class="ge"> <h2 style="color:red;">NEW TOUR INFO.</h2></div>
+
+    <div class="ge">   <label for="id">booking ID: </label><input type="text" name="id"  required></div>
+    <div class="ge"> <label for="place">place:</label><input type="text" name="place" required></div>
+    <div class="ge">  <label for="cost">package cost:</label><input type="text" name="cost" required></div>
+    <div class="ge"><label for="transport">transportation:</label><input type="text" name="transport" required></div>
+    <div class="ge"> <label for="best">best time to visit:</label><input type="text" name="best" required></div>
+    <div class="ge" style="margin-left:305px;"> <button type="submit" class="btn btn-danger">submit</button></div>
 </form>
+
+
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="javascripts/existingtour.js"></script>
+
+</div>
 </body>
 
 </html>

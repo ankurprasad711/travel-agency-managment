@@ -175,7 +175,8 @@ module.exports={
             "'" + data.destination + "'," +
             "'" + data.type + "'," +
             "'" + data.dob + "'," +
-            "'" + data.doj + "'" +
+            "'" + data.doj + "'," +
+            "'" + data.id + "'" +
             // "'" + data.best +"'"+
             ");";
         console.log(queryString);
@@ -242,6 +243,26 @@ module.exports={
         conn.query(queryString,function(err,result){
             console.log(result);
             cb(result);
+        });
+        conn.end();
+    },
+    search : function (data ,cb) {
+        var c1=[];
+        const conn = createConnection();
+        conn.connect();
+
+        conn.query("select * from search where boarding="+"'"+data.b+"'"+"and destination="+"'"+data.d+"'", function (err ,rows,fields) {
+            if(err)
+                throw err;
+
+            console.log(rows);
+            for(var row=0;row<rows.length;row++) {
+                c1.push({
+                    b:rows[row].boarding,
+                    d: rows[row].destination
+                });
+            }
+            cb(c1);
         });
         conn.end();
     }

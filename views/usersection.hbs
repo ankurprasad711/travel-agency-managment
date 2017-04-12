@@ -4,19 +4,38 @@
     <meta charset="UTF-8">
     <title>Travel agency</title>
 </head>
-<style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<style>
+    body {
+        background: url(https://4.bp.blogspot.com/-k8IX2Mkf0Jo/U4ze2gNn7CI/AAAAAAAA7xg/iKxa6bYITDs/s0/HOT+Balloon+Trip_Ultra+HD.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+    }
+    #show{
+        background-color: white;
+
+    }
+    .h{
+      color:cyan;
+    }
 </style>
 <body>
-<h2>hello {{name}}</h2>
-<button id="new">book a tour</button>
-<button id="del">cancel tour</button>
-<button id="book">view tour bookings</button>
+<h2 class="h">Hello {{name}}</h2><br><br>
+<button id="new" class="btn btn-primary">book a tour</button>
+<button id="del" class="btn btn-warning">cancel tour</button>
+<button id="book" class="btn btn-success">view tour bookings</button>
 
 
-<a href="/users/bookaticket"><button >book a ticket</button></a>
-<button id="ticket">booked tickets</button>
-<button id="cancelticket">cancel ticket</button>
+<a href="/users/bookaticket"><button class="btn btn-danger">book a ticket</button></a>
+<button id="ticket" class="btn btn-info">booked tickets</button>
+<button id="cancelticket" class="btn btn-default">cancel ticket</button>
+<br><br><br><br><br>
 <div id="show">
 
 </div>
@@ -42,7 +61,7 @@ $(document).ready(function() {
             //alert("Data: " + data + "\nStatus: " + status);
             console.log(data);
             var l = '';
-            l += '<form action="/users/booktour" method="post"><table border="1">' +
+            l += '<form action="/users/booktour" method="post"><table class="table" border="1">' +
                     "<tr><td>Select</td><td>booking id</td><td>place</td>" +
                     "<td>package_cost</td><td>transportation" +
                     "</td><td>vehicle</td></tr> ";
@@ -59,7 +78,7 @@ $(document).ready(function() {
                         "</tr>";
 
             }
-            l += "</table><button type='submit'>book</button></form>";
+            l += "</table><button class='btn btn-danger' type='submit'>book</button></form>";
             console.log(l);
             $("#show").html(l);
         });
@@ -77,7 +96,7 @@ $(document).ready(function() {
             }
             else {
                 //var l='';
-                l += "<form action='/users/delete' method='post'><table border='1'><tr><td>Select</td><td>booking id</td>" +
+                l += "<form action='/users/delete' method='post'><table class='table' border='1'><tr><td>Select</td><td>booking id</td>" +
                         "<td>date of booking</td><td>date of journey</td>" +
                         "<td>number of passengers</td>" +
                         "</tr> ";
@@ -97,7 +116,7 @@ $(document).ready(function() {
                             "</tr>";
 
                 }
-                l += "</table><button type='submit'>cancel</button></form>";
+                l += "</table><button class='btn btn-danger' type='submit'>cancel</button></form>";
                 //$("#show").html(l);
             }
             $("#show").html(l);
@@ -119,7 +138,7 @@ $(document).ready(function() {
             }
             else {
 
-                l += "<table border='1'><tr><td>booking id</td><td>date of booking</td><td>date of journey</td><td>number of passengers</td></tr> ";
+                l += "<table class='table' border='1'><tr><td>booking id</td><td>date of booking</td><td>date of journey</td><td>number of passengers</td></tr> ";
                 for (var i = 0; i < data.length; i++) {
                     var dob = data[i].dob;
                     dob = dob.slice(0, 10);
@@ -155,7 +174,7 @@ $(document).ready(function() {
             }
             else {
 
-                l += "<table border='1'><tr><td>date of booking</td><td>date of journey</td><td>number of passengers</td><td>type_of_transport</td><td>boarding_point</td><td>destination</td></tr>";
+                l += "<table class='table' border='1'><tr><td>date of booking</td><td>date of journey</td><td>number of passengers</td><td>type_of_transport</td><td>boarding_point</td><td>destination</td></tr>";
                 for (var i = 0; i < data.length; i++) {
                     var dob = data[i].dob;
                     dob = dob.slice(0, 10);
@@ -194,7 +213,7 @@ $(document).ready(function() {
             }
             else {
 
-                l += "<form action='/users/deleteticket' method='post'><table border='1'><tr><td>select></td><td>date of booking</td><td>date of journey</td><td>number of passengers</td><td>type_of_transport</td><td>boarding_point</td><td>destination</td></tr>";
+                l += "<form action='/users/deleteticket' method='post'><table class='table' border='1'><tr><td>select></td><td>date of booking</td><td>date of journey</td><td>number of passengers</td><td>type_of_transport</td><td>boarding_point</td><td>destination</td></tr>";
                 for (var i = 0; i < data.length; i++) {
                     var dob = data[i].dob;
                     dob = dob.slice(0, 10);
@@ -214,7 +233,7 @@ $(document).ready(function() {
                             "</tr>";
 
                 }
-                l += "</table><button type='submit'>cancel</button></form>";
+                l += "</table><button class='btn btn-danger' type='submit'>cancel</button></form>";
                 //$("#show").html(l);
             }
             $("#show").html(l);

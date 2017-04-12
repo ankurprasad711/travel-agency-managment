@@ -1,12 +1,40 @@
-<form action="/users/existing" method="post">
-    <input name="id" id="i" type="text">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <input name="user" id="nam" type="text">
-   <label>package_cost</label><input id="pack" type="number">
-    <input type="number" name="pass" placeholder="no. of passengers" required id="no"><button type="button" id="nos">calculate fare</button><br>
-    <input name="doj" type="date" placeholder="date of journey">
-    <input name="c" id="cost" type="text">
-    <button type="submit">submit</button>
+<style>
+    body {
+        background: url(https://4.bp.blogspot.com/-k8IX2Mkf0Jo/U4ze2gNn7CI/AAAAAAAA7xg/iKxa6bYITDs/s0/HOT+Balloon+Trip_Ultra+HD.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+    }
+    div{
+        padding: 10px;
+        margin-left: 175px;
+    }
+
+    label{
+        color: yellow;
+        margin-left:15px;
+    }
+    div.pk{
+        margin-top: -30px
+    }
+
+    }
+    </style>
+<form action="/users/existing" method="post">
+    <div><input name="id" id="i" type="text"></div>
+
+    <div><input name="user" id="nam" type="text"></div>
+    <label>package_cost</label><div class="pk"><input id="pack" type="number"></div>
+    <div><input type="number" name="pass" placeholder="no. of passengers" required id="no"><button type="button" id="nos">calculate fare</button></div>
+    <div><input name="doj" type="date" placeholder="date of journey"></div>
+    <div><input name="c" id="cost" type="text"></div>
+    <div><button type="submit">submit</button></div>
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script>
